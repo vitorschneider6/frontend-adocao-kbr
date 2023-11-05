@@ -10,7 +10,7 @@ import { AnimalCriacaoResponse } from '../../interfaces/animal-criacao-response'
 })
 export class AnimalAdminService {
 
-  private readonly endpointGetAllAnimals = "https://vitor-adocao-kbr.azurewebsites.net/admin/animais"
+  private readonly endpointGetAllAnimals = "https://vitor-adocao-kbr.azurewebsites.net/v1/admin/animais"
   private readonly endpointDeleteAnimal = "https://vitor-adocao-kbr.azurewebsites.net/v1/animais"
   private readonly endpointAddAnimal = "https://vitor-adocao-kbr.azurewebsites.net/v1/animais"
   private readonly endpointEditarAnimal = "https://vitor-adocao-kbr.azurewebsites.net/v1/animais/"
