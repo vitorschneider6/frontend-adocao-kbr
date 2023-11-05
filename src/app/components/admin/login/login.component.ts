@@ -32,6 +32,8 @@ export class LoginComponent {
           this.router.navigate(["/admin/home"])
 
         }, 5000)
+
+        console.log(result.data)
         this.cookies.set('token', result.data.token)
         this.cookies.set('nome', result.data.nome)
         this.cookies.set('id', result.data.id)
