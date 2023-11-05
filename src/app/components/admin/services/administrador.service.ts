@@ -24,7 +24,7 @@ export class AdministradorService {
     private readonly endpointRecuperarSenha = "https://vitor-adocao-kbr.azurewebsites.net/v1/recuperar-senha/"
     private readonly endpointGerarRecuperacao = "https://vitor-adocao-kbr.azurewebsites.net/v1/gerar-recuperacao/"
     private readonly token = this.cookies.get('token')
-    private readonly httpOptions = {
+    private httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.token}`
       })
@@ -92,6 +92,11 @@ enviarLinkRecuperacao(email: string){
 
 
 logado(){
+  this.httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': `Bearer ${this.cookies.get("token")}`
+    })
+  };
   return this.http.post(this.endpointAuth, {}, this.httpOptions);
 }
 
