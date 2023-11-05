@@ -8,7 +8,7 @@ import { SolicitacaoResponse } from '../interfaces/solicitacoes-response';
 })
 export class SolicitacaoAdminService {
   private readonly token = this.cookies.get('token')
-  private readonly endpointGetSolicitacoes = "http://vitor-adocao-kbr.azurewebsites.net/v1/solicitacoes?"
+  private readonly endpointGetSolicitacoes = "https://vitor-adocao-kbr.azurewebsites.net/v1/solicitacoes?"
 
   constructor(private http : HttpClient, private cookies : CookieService) { }
 
