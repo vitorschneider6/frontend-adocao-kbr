@@ -10,11 +10,11 @@ import { AnimalCriacaoResponse } from '../../interfaces/animal-criacao-response'
 })
 export class AnimalAdminService {
 
-  private readonly endpointGetAllAnimals = "https://vitor-adocao-kbr.azurewebsites.net/admin/animais"
-  private readonly endpointDeleteAnimal = "https://vitor-adocao-kbr.azurewebsites.net/v1/animais"
-  private readonly endpointAddAnimal = "https://vitor-adocao-kbr.azurewebsites.net/v1/animais"
-  private readonly endpointEditarAnimal = "https://vitor-adocao-kbr.azurewebsites.net/v1/animais/"
-  private readonly endpointAddFoto = "https://vitor-adocao-kbr.azurewebsites.net/v1/animais/upload-image/"
+  private readonly endpointGetAllAnimals = "http://vitor-adocao-kbr.azurewebsites.net/admin/animais"
+  private readonly endpointDeleteAnimal = "http://vitor-adocao-kbr.azurewebsites.net/v1/animais"
+  private readonly endpointAddAnimal = "http://vitor-adocao-kbr.azurewebsites.net/v1/animais"
+  private readonly endpointEditarAnimal = "http://vitor-adocao-kbr.azurewebsites.net/v1/animais/"
+  private readonly endpointAddFoto = "http://vitor-adocao-kbr.azurewebsites.net/v1/animais/upload-image/"
   private readonly token = this.cookies.get('token')
   private readonly httpOptions = {
     headers: new HttpHeaders({

@@ -14,15 +14,15 @@ import { AuthResponse } from '../interfaces/auth';
 })
 export class AdministradorService {
   private readonly endpointGetAdministradores =
-    'https://vitor-adocao-kbr.azurewebsites.net/v1/administradores';
-    private readonly endpointGetAdministrador = 'https://vitor-adocao-kbr.azurewebsites.net/v1/administradores/'
-    private readonly endpointRegisterAdministrador = "https://vitor-adocao-kbr.azurewebsites.net/v1/register"
-    private readonly endpointAuthAdmin = 'https://vitor-adocao-kbr.azurewebsites.net/v1/login'
-    private readonly endpointAuth = 'https://vitor-adocao-kbr.azurewebsites.net/v1/auth'
-    private readonly endpointUpdateAdministrador = "https://vitor-adocao-kbr.azurewebsites.net/v1/administradores/"
-    private readonly endpointDeleteAdministrador = "https://vitor-adocao-kbr.azurewebsites.net/v1/administradores/"
-    private readonly endpointRecuperarSenha = "https://vitor-adocao-kbr.azurewebsites.net/v1/recuperar-senha/"
-    private readonly endpointGerarRecuperacao = "https://vitor-adocao-kbr.azurewebsites.net/v1/gerar-recuperacao/"
+    'http://vitor-adocao-kbr.azurewebsites.net/v1/administradores';
+    private readonly endpointGetAdministrador = 'http://vitor-adocao-kbr.azurewebsites.net/v1/administradores/'
+    private readonly endpointRegisterAdministrador = "http://vitor-adocao-kbr.azurewebsites.net/v1/register"
+    private readonly endpointAuthAdmin = 'http://vitor-adocao-kbr.azurewebsites.net/v1/login'
+    private readonly endpointAuth = 'http://vitor-adocao-kbr.azurewebsites.net/v1/auth'
+    private readonly endpointUpdateAdministrador = "http://vitor-adocao-kbr.azurewebsites.net/v1/administradores/"
+    private readonly endpointDeleteAdministrador = "http://vitor-adocao-kbr.azurewebsites.net/v1/administradores/"
+    private readonly endpointRecuperarSenha = "http://vitor-adocao-kbr.azurewebsites.net/v1/recuperar-senha/"
+    private readonly endpointGerarRecuperacao = "http://vitor-adocao-kbr.azurewebsites.net/v1/gerar-recuperacao/"
     private readonly token = this.cookies.get('token')
     private readonly httpOptions = {
       headers: new HttpHeaders({

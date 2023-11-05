@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class SolicitacaoService {
 
-  private endpointCadastrarSolicitacao = "https://vitor-adocao-kbr.azurewebsites.net/v1/solicitacoes"
+  private endpointCadastrarSolicitacao = "http://vitor-adocao-kbr.azurewebsites.net/v1/solicitacoes"
   private readonly token = this.cookies.get('token')
   private readonly httpOptions = {
     headers: new HttpHeaders({
