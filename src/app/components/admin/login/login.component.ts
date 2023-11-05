@@ -30,7 +30,7 @@ export class LoginComponent {
     this.service.auth(this.dados.email, this.dados.senha).subscribe(result => {
         setTimeout(() => {
           this.router.navigate(["/admin/home"])
-
+          window.location.reload();
         }, 5000)
 
         console.log(result.data)
