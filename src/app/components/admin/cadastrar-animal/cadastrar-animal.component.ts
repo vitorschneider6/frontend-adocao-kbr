@@ -66,6 +66,7 @@ export class CadastrarAnimalComponent {
             (result) => {
               alert('Animal cadastrado com sucesso!');
               this.router.navigate(['/admin/animais']);
+              window.location.reload();
             },
             (error) => {
               alert('Algo deu errado!');
