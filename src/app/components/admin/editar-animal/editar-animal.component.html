@@ -1,0 +1,225 @@
+<body class="bg-dark h-100">
+  <app-cabecalho-admin></app-cabecalho-admin>
+  <div class="d-flex" style="min-height: calc(100vh - 26px - 72px)">
+    <aside class="bg-custom text-light py-4" style="width: 250px">
+      <app-sidebar></app-sidebar>
+    </aside>
+    <main class="col h-100 text-light p-4">
+      <div class="d-flex align-items-end justify-content-between mb-4">
+        <h1 class="h3">Editar Animal</h1>
+
+        <a routerLink="/admin/animais" class="btn btn-light">Voltar</a>
+      </div>
+
+      <form
+        class="bg-custom rounded col-12 py-3 px-4"
+        (submit)="editarAnimal()"
+      >
+        <div class="mb-3 row">
+          <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              class="form-control bg-dark text-light border-dark"
+              id="nome"
+              placeholder="Ex: Oliver"
+              name="nome"
+              [(ngModel)]="animal.nome"
+              #nome="ngModel"
+              required
+            />
+          </div>
+        </div>
+
+        <div *ngIf="nome.invalid" class="alert">
+          <div *ngIf="nome.errors?.['required']">Nome é obrigatório.</div>
+        </div>
+
+          <div class="mb-3 row">
+            <label for="idade" class="col-sm-2 col-form-label"
+              >Idade (anos):</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control bg-dark text-light border-dark"
+                id="idade"
+                placeholder="Ex: 2"
+                name="idade"
+                [(ngModel)]="animal.idade"
+                #idade="ngModel"
+                required
+              />
+            </div>
+          </div>
+
+          <div *ngIf="idade.invalid" class="alert">
+            <div *ngIf="idade.errors?.['required']">Idade é obrigatório.</div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="peso" class="col-sm-2 col-form-label"
+              >Peso (opcional):</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control bg-dark text-light border-dark"
+                id="senha"
+                name="peso"
+                placeholder="4"
+                [(ngModel)]="animal.peso"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="descricao" class="col-sm-2 col-form-label"
+              >Sobre:</label
+            >
+            <div class="col-sm-10">
+              <ckeditor
+                [editor]="editor"
+                (change)="onMudanca($event)"
+              ></ckeditor>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="local" class="col-sm-2 col-form-label">Local:</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control bg-dark text-light border-dark"
+                id="local"
+                name="local"
+                placeholder="Vila Rica - RS - Harmonia"
+                [(ngModel)]="animal.local"
+                #local="ngModel"
+                required
+              />
+            </div>
+          </div>
+          <div *ngIf="local.invalid" class="alert">
+            <div *ngIf="local.errors?.['required']">Local é obrigatório.</div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="genero" class="col-sm-2 col-form-label">Gênero:</label>
+            <div class="col-sm-10">
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-dark">
+                  <input
+                    type="radio"
+                    name="genero"
+                    value="Macho"
+                    [(ngModel)]="animal.sexo"
+                    #sexo="ngModel"
+                    required
+                  />
+                  Macho
+                </label>
+                <label class="btn btn-dark">
+                  <input
+                    type="radio"
+                    name="genero"
+                    value="Femea"
+                    [(ngModel)]="animal.sexo"
+                    #sexo="ngModel"
+                    required
+                  />
+                  Fêmea
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="sexo.invalid" class="alert">
+            <div *ngIf="sexo.errors?.['required']">Você deve escolher o sexo do animal.</div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="porte" class="col-sm-2 col-form-label">Porte:</label>
+            <div class="col-sm-10">
+              <select
+                class="form-select bg-dark text-light border-dark"
+                id="porte"
+                name="porte"
+                [(ngModel)]="animal.porte"
+                #porte="ngModel"
+                required
+              >
+                <option selected disabled>Selecione</option>
+                <option value="Pequeno">Pequeno</option>
+                <option value="Médio">Médio</option>
+                <option value="Grande">Grande</option>
+              </select>
+            </div>
+          </div>
+
+          <div *ngIf="porte.invalid" class="alert">
+            <div *ngIf="porte.errors?.['required']">Porte é obrigatório.</div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="especie" class="col-sm-2 col-form-label"
+              >Espécie:</label
+            >
+            <div class="col-sm-10">
+              <select
+                class="form-select bg-dark text-light border-dark"
+                id="especie"
+                name="especie"
+                [(ngModel)]="animal.especieId"
+                (ngModelChange)="listarRacas()"
+                #especie="ngModel"
+                required
+              >
+                <option selected disabled>Selecione</option>
+                <option
+                  *ngFor="let especie of especies"
+                  value="{{ especie.id }}"
+                >
+                  {{ especie.nome }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div *ngIf="especie.invalid" class="alert">
+            <div *ngIf="especie.errors?.['required']">Você deve selecionar uma espécie.</div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="raca" class="col-sm-2 col-form-label">Raça:</label>
+            <div class="col-sm-10">
+              <select
+                class="form-select bg-dark text-light border-dark"
+                id="raca"
+                name="raca"
+                [(ngModel)]="animal.racaId"
+                #raca="ngModel"
+                required
+              >
+                <option selected disabled>Selecione</option>
+                <option *ngFor="let raca of racas" value="{{ raca.id }}">
+                  {{ raca.nome }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div *ngIf="raca.invalid" class="alert">
+            <div *ngIf="raca.errors?.['required']">Raça é obrigatório.</div>
+          </div>
+
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-light">Editar</button>
+        </div>
+      </form>
+
+      <div class="bg-custom rounded overflow-hidden"></div>
+    </main>
+  </div>
+  <app-rodape-admin></app-rodape-admin>
+</body>

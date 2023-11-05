@@ -1,0 +1,104 @@
+<app-cabecalho></app-cabecalho>
+
+<nav aria-label="breadcrumb" class="p-3 ps-5 bg-custom-light">
+    <div class="container">
+        <ol class="breadcrumb m-0">
+            <li class="breadcrumb-item fs-sm"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active fs-sm" aria-current="page">Quero Adotar</li>
+        </ol>
+    </div>
+</nav>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <aside style="width: 320px;">
+                <form  (submit)="filtrarBusca()" class="bg-custom rounded p-3 text-uppercase pt-4 mt-2 position-sticky" style="top: 1rem;">
+                    <div class="mb-3 text-light bowlby-one">
+                        Filtros
+                    </div>
+
+                    <div class="form-group py-2">
+                        <label for="especie" class="text-capitalize text-light">Espécie</label>
+                        <select name="especie" id="especie" class="form-control form-select" [(ngModel)] = "filtro.EspecieId" (change)="listarRacas()">
+                            <option value="" selected>Todas</option>
+                            <option *ngFor="let especie of especies" value="{{especie.id}}" >{{especie.nome}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <label for="raca" class="text-capitalize text-light">Raça</label>
+                        <select name="raca" id="raca" class="form-control form-select" [(ngModel)] = "filtro.RacaId">
+                            <option value="" selected>Todas</option>
+                            <option *ngFor="let raca of racas" value="{{raca.id}}" >{{raca.nome}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <label for="local" class="text-capitalize text-light">Local</label>
+                        <input type="text" class="form-control" name="local" id="local" placeholder="Ex: São Paulo" [(ngModel)] = "filtro.Local">
+                    </div>
+
+                    <div class="form-group py-2">
+                        <label for="porte" class="text-capitalize text-light">Porte</label>
+                        <select name="porte" id="porte" class="form-control form-select" [(ngModel)] = "filtro.Porte">
+                            <option value="" selected disabled>Selecione</option>
+                            <option value="Pequeno" >Pequeno</option>
+                            <option value="Médio" >Médio</option>
+                            <option value="Grande">Grande</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <div class="w-100 text-capitalize text-light">Sexo</div>
+                        
+                        <div class="bg-light p-2 rounded d-flex flex-wrap row-gap-2">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sexo" id="femea" value="Femea" [(ngModel)] = "filtro.Sexo">
+                                <label class="form-check-label text-capitalize" for="femea">Fêmea</label>
+                            </div>
+    
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sexo" id="macho" value="Macho" [(ngModel)] = "filtro.Sexo">
+                                <label class="form-check-label text-capitalize" for="macho">Macho</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-end">
+                        <button type="submit" class="btn btn-custom-2 mt-4">Buscar</button>
+                    </div>
+                </form>
+            </aside>
+
+            <main class="bg-light p-4 pb-5 col" >
+                <h2 class="h4 py-2 pb-0 text-uppercase m-0 bowlby-one">Quero Adotar</h2>
+                <p class="m-0 pb-2">Conheça os pets disponíveis para adoção</p>
+                <div class="row row-gap-4 mt-4" *ngIf="animais.length > 0 else semAnimais">
+                    <ng-container *ngFor="let animal of animais">
+                        <div class="col-xxl-3 col-4">
+                            <div class="animal-card-container">
+                                <app-animal-card [animal]="animal"></app-animal-card>
+                            </div>
+                        </div>
+                    </ng-container>
+            </div>
+            <ng-template #semAnimais>
+                <h2>Não há animais cadastrados.</h2>
+            </ng-template>
+
+
+                <nav class="mt-5" *ngIf="this.precisaPaginacao">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"><a class="page-link btn-custom" (click)="handleAnterior()">Anterior</a></li>
+                        <li *ngFor="let n of [].constructor(this.totalPaginas); let i = index" class="page-item"><a class="page-link btn-custom" (click)="handlePaginacao(i)">{{i + 1}}</a></li>
+                        <li class="page-item"><a class="page-link btn-custom" (click)="handleProximo()">Próximo</a></li>
+                    </ul>
+                </nav>
+            </main>
+
+        </div>
+    </div>
+</section>
+
+<app-rodape />

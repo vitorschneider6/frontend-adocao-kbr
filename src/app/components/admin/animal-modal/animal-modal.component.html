@@ -1,0 +1,64 @@
+<body class="bg-dark">
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered text-light">
+        <div class="modal-content bg-custom">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Animal</h1>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body d-flex flex-wrap row-gap-4">
+            <div class="col-6">
+              <div><small>Nome:</small></div>
+              <div>{{animal?.nome}}</div>
+            </div>
+    
+            <div class="col-6">
+              <div><small>Local:</small></div>
+              <div>{{animal?.local}}</div>
+            </div>
+    
+            <div class="col-6">
+              <div><small>Espécie:</small></div>
+              <div>{{animal?.especie?.nome}}</div>
+            </div>
+
+            <div class="col-6">
+                <div><small>Raça:</small></div>
+                <div>{{animal?.raca?.nome}}</div>
+              </div>
+
+              <div class="col-6">
+                <div><small>Peso:</small></div>
+                <div *ngIf="animal?.peso">{{animal?.peso}}</div>
+                <div *ngIf="!animal?.peso">Peso não informado.</div>
+              </div>
+  
+              <div class="col-6">
+                  <div><small>Porte:</small></div>
+                  <div>{{animal?.porte}}</div>
+                </div>
+                <div class="col-6">
+                    <div><small>Sobre:</small></div>
+                    <div>{{animal?.sobre}}</div>
+                  </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </body>

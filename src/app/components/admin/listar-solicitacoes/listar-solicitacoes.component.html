@@ -1,0 +1,168 @@
+<body class="bg-dark h-100">
+  <app-cabecalho-admin></app-cabecalho-admin>
+  <div class="d-flex" style="min-height: calc(100vh - 76px - 72px)">
+    <aside class="bg-custom text-light py-4" style="width: 250px">
+      <app-sidebar></app-sidebar>
+    </aside>
+    <main class="col h-100 text-light p-4">
+      <div class="d-flex justify-content-between mb-4">
+        <h1 class="h3">Solicitações</h1>
+
+        <a (click)="exportCSV()" class="btn btn-light" title="Excel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-earmark-excel" viewBox="0 0 16 16">
+                <path d="M5.884 6.68a.5.5 0 1 0-.768.64L7.349 10l-2.233 2.68a.5.5 0 0 0 .768.64L8 10.781l2.116 2.54a.5.5 0 0 0 .768-.641L8.651 10l2.233-2.68a.5.5 0 0 0-.768-.64L8 9.219l-2.116-2.54z"/>
+                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+            </svg>
+        </a>
+      </div>
+
+
+
+      <div class="d-flex justify-content-between align-items-end mb-3">
+        <form
+          (submit)="getAllSolicitacoes()"
+          class="bg-custom rounded col-12 py-3 px-4"
+        >
+          <div class="row align-items-end row-gap-4">
+            <div class="col-3 d-flex flex-wrap">
+              <label for="search" class="col-form-label"
+                >Nome do Solicitante:</label
+              >
+              <div class="col-12">
+                <input
+                  type="text"
+                  class="form-control bg-dark text-light border-dark"
+                  id="search"
+                  name="nomeSolicitante"
+                  placeholder="Ex: Vitor"
+                  [(ngModel)]="nomeSolicitante"
+                />
+              </div>
+            </div>
+
+            <div class="col-3 d-flex flex-wrap">
+              <label for="search" class="col-form-label">Nome do Animal:</label>
+              <div class="col-12">
+                <input
+                  type="text"
+                  class="form-control bg-dark text-light border-dark"
+                  id="search"
+                  name="nomeAnimal"
+                  placeholder="Ex: Oliver"
+                  [(ngModel)]="nomeAnimal"
+                />
+              </div>
+            </div>
+
+            <div class="col-5 row">
+              <div class="col-12 col-form-label">Data:</div>
+
+              <div class="col-6 d-flex gap-2">
+                <label for="de" class="col-form-label">De:</label>
+                <input
+                  type="text"
+                  class="form-control bg-dark text-light border-dark"
+                  id="de"
+                  name="dataInicial"
+                  placeholder="27/10/2023"
+                  [(ngModel)]="dataInicial"
+                />
+              </div>
+
+              <div class="col-6 d-flex gap-2">
+                <label for="ate" class="col-form-label">Até:</label>
+                <input
+                  type="text"
+                  class="form-control bg-dark text-light border-dark"
+                  id="ate"
+                  placeholder="27/10/2023"
+                  name="dataFinal"
+                  [(ngModel)]="dataFinal"
+                />
+              </div>
+            </div>
+
+            <div class="col d-flex justify-content-end">
+              <button type="submit" class="btn btn-light w-100">Filtrar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="bg-custom rounded overflow-hidden">
+        <table class="table mb-0 table-custom table-dark align-middle">
+          <thead>
+            <tr>
+              <th scope="col" class="text-uppercase">Nome do Solicitante</th>
+              <th scope="col" class="text-uppercase">Nome do Animal</th>
+              <th scope="col" class="text-uppercase text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let solicitacao of solicitacoes">
+              <td>{{ solicitacao.nomeSolicitante }}</td>
+              <td>{{ solicitacao.animal.nome }}</td>
+              <td>
+                <div class="d-flex justify-content-center">
+                  <button
+                    type="button"
+                    class="btn btn-light d-flex justify-content-center align-items-center rounded-circle p-2 mx-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    (click)="infoModal(solicitacao)"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-search"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <nav aria-label="navigation" *ngIf="this.precisaPaginacao">
+        <ul class="pagination justify-content-end pt-4 pb-2">
+          <li class="page-item">
+            <a
+              class="page-link bg-custom border-dark link-light"
+              (click)="handlePaginacao(this.page - 1)"
+              >Anterior</a
+            >
+          </li>
+          <li
+            class="page-item"
+            *ngFor="let n of [].constructor(this.totalPaginas); let i = index"
+          >
+            <a
+              class="page-link bg-custom border-dark link-light"
+              (click)="handlePaginacao(i)"
+              >{{ i + 1 }}</a
+            >
+          </li>
+          <li class="page-item">
+            <a
+              class="page-link bg-custom border-dark link-light"
+              (click)="handlePaginacao(this.page + 1)"
+              >Próximo</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </main>
+  </div>
+
+  <app-rodape-admin></app-rodape-admin>
+</body>
+
+<app-solicitacao-modal [solicitacao]="solicitacaoModal"></app-solicitacao-modal>
